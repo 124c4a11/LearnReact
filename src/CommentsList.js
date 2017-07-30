@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import Comment from './Comment';
 
 export default class CommentsList extends Component {
+  static defaultProps = {
+    comments: []
+  };
+
   state = {
     isOpen: false
   };
@@ -23,7 +27,7 @@ export default class CommentsList extends Component {
     if(!this.state.isOpen) return null;
 
     const {comments} = this.props;
-    if (!comments || !comments.length) return <p>no comments</p>
+    if (!comments.length) return <p>no comments</p>
 
     return (
       <ul>
