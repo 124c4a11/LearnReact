@@ -4,7 +4,7 @@ import CommentsList from './CommentsList';
 import toggleOpen from '../decorators/toggleOpen';
 
 
-class Article extends Component {
+export default class Article extends Component {
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -42,5 +42,3 @@ class Article extends Component {
     );
   };
 }
-
-export default toggleOpen(Article);
