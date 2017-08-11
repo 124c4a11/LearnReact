@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {CSSTransitionGroup} from 'react-transition-group';
 import PropTypes from 'prop-types';
-import CommentsList from './CommentsList';
-import toggleOpen from '../decorators/toggleOpen';
-import './article.css';
+import CommentsList from '../CommentsList';
+import toggleOpen from '../../decorators/toggleOpen';
+import './style.css';
 
 
 export default class Article extends Component {
