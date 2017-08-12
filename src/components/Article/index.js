@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {CSSTransitionGroup} from 'react-transition-group';
 import PropTypes from 'prop-types';
 import CommentsList from '../CommentsList';
 import toggleOpen from '../../decorators/toggleOpen';
+import {deleteArticle} from '../../AC';
 import './style.css';
 
 
-export default class Article extends Component {
+class Article extends Component {
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -29,6 +31,7 @@ export default class Article extends Component {
         <button onClick = {toggleOpen}>
           {isOpen ? 'Close' : 'Open'}
         </button>
+        <button onClick = {this.handleDelete}>delete me</button>
         <CSSTransitionGroup
           transitionName = 'article'
           transitionEnterTimeout = {300}
@@ -38,6 +41,11 @@ export default class Article extends Component {
         </CSSTransitionGroup>
       </div>
     );
+  };
+
+  handleDelete = () => {
+    const {deleteArticle, article} = this.props;
+    deleteArticle(article.id);
   };
 
   getBody() {
@@ -51,3 +59,6 @@ export default class Article extends Component {
     );
   };
 }
+
+
+export default connect(null, {deleteArticle})(Article);

@@ -12,17 +12,11 @@ export default class App extends Component {
   };
 
   render() {
-    const options = this.props.articles.map((article) => ({
-      label: article.title,
-      value: article.id
-    }));
-
     return (
       <div>
         <Counter />
         <UserForm />
-        <Select options = {options} value = {this.state.selection} onChange = {this.changeSelection} multi />
-        <ArticleList articles = {this.props.articles} />
+        <ArticleList />
       </div>
     );
   }
