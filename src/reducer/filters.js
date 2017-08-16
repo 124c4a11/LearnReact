@@ -10,7 +10,7 @@ const defaultFilters = {
 };
 
 
-export default (filters = deraultFilters, action) => {
+export default (filters = defaultFilters, action) => {
   const {type, payload} = action;
 
   switch(type) {

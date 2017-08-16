@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ArticleList from './ArticleList';
 import UserForm from './UserForm';
-import Select from 'react-select';
 import Counter from './Counter';
+import Filters from './Filters';
+
 import 'react-select/dist/react-select.css';
 
 
@@ -16,6 +17,7 @@ export default class App extends Component {
       <div>
         <Counter />
         <UserForm />
+        <Filters />
         <ArticleList />
       </div>
     );
