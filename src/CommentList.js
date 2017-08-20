@@ -11,6 +11,10 @@ export default class CommentList extends Component {
     };
   }
 
+  static defaultProps = {
+    comments: []
+  };
+
   render() {
     const isOpen = this.state.isOpen;
 
@@ -34,7 +38,7 @@ export default class CommentList extends Component {
     if (!this.state.isOpen) return null;
 
     const {comments} = this.props;
-    if (!comments || !comments.length) return <p>No comments yep!</p>;
+    if (!comments.length) return <p>No comments yep!</p>;
 
     return (
       <ul>
