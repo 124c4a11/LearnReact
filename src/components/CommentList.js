@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import Comment from './Comment';
+import toggleOpen from '../decorators/toggleOpen';
 
 
-export default class CommentList extends Component {
+class CommentList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isOpen: false
-    };
   }
 
   static defaultProps = {
@@ -16,11 +13,11 @@ export default class CommentList extends Component {
   };
 
   render() {
-    const isOpen = this.state.isOpen;
+    const {isOpen, toggleOpen} = this.props;
 
     return (
       <div>
-        <button onClick={this.toggleOpen}>
+        <button onClick={toggleOpen}>
           {isOpen ? 'close' : 'open'}
         </button>
         {this.getBody()}
@@ -28,16 +25,11 @@ export default class CommentList extends Component {
     );
   }
 
-  toggleOpen = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-
   getBody() {
-    if (!this.state.isOpen) return null;
+    const {comments, isOpen} = this.props;
 
-    const {comments} = this.props;
+    if (!isOpen) return null;
+
     if (!comments.length) return <p>No comments yep!</p>;
 
     return (
@@ -49,3 +41,6 @@ export default class CommentList extends Component {
     );
   }
 }
+
+
+export default toggleOpen(CommentList);
