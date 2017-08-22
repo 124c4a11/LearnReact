@@ -18,7 +18,7 @@ class CommentList extends Component {
     return (
       <div>
         <button onClick={toggleOpen}>
-          {isOpen ? 'close' : 'open'}
+          {isOpen ? 'hide comments' : 'show comments'}
         </button>
         {this.getBody()}
       </div>
