@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SelectFilter from './SelectFilter';
+import DateRange from './DateRange';
 
 
 export default class Filters extends Component {
@@ -7,6 +8,7 @@ export default class Filters extends Component {
     return (
       <div>
         <SelectFilter articles={this.props.articles} />
+        <DateRange />
       </div>
     );
   };
