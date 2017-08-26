@@ -2,39 +2,23 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ArticleList from './ArticleList';
 import UserForm from './UserForm';
-
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import Filters from './Filters';
 
 
 export default class App extends Component  {
   static propTypes = {
-
-  };
-
-  state = {
-    selection: null
+    articles: PropTypes.array.isRequired
   };
 
   render() {
-    const options = this.props.articles.map((article) => ({
-      label: article.title,
-      value: article.id
-    }));
+    const {articles} = this.props;
 
     return (
       <div>
         <UserForm />
-        <Select
-          options={options}
-          value={this.state.selection}
-          onChange={this.changeSelection}
-          multi
-        />
-        <ArticleList articles={this.props.articles} />
+        <Filters articles={articles} />
+        <ArticleList articles={articles} />
       </div>
     );
   }
-
-  changeSelection = (selection) => this.setState({ selection });
 }
