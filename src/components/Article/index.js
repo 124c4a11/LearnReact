@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import CommentList from './CommentList';
-import toggleOpen from '../decorators/toggleOpen';
+import CommentList from '../CommentList';
+import toggleOpen from '../../decorators/toggleOpen';
 import {CSSTransitionGroup} from 'react-transition-group';
 
 import './article.css';
