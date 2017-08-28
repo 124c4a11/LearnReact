@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CommentList from '../CommentList';
 import toggleOpen from '../../decorators/toggleOpen';
 import {CSSTransitionGroup} from 'react-transition-group';
+import {connect} from 'react-redux';
+import {deleteArticle} from '../../AC';
 
 import './article.css';
 
@@ -31,6 +33,7 @@ class Article extends Component {
         <button onClick = {toggleOpen}>
           {isOpen ? 'close' : 'open'}
         </button>
+        <button onClick={this.handleDelete}>delete me</button>
         <CSSTransitionGroup
           transitionName='article'
           transitionEnterTimeout={300}
@@ -54,7 +57,13 @@ class Article extends Component {
       </section>
     );
   }
+
+  handleDelete = () => {
+    const {deleteArticle, article} = this.props;
+    deleteArticle(article.id);
+    console.log('delete article');
+  };
 }
 
 
-export default Article;
+export default connect(null, {deleteArticle})(Article);
