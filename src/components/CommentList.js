@@ -35,12 +35,14 @@ class CommentList extends Component {
 
     if (!isOpen) return null;
 
-    if (!comments.length) return (
-      <div>
-        <p>No comments yep!</p>
-        <CommentForm />
-      </div>
-    );
+    if (!comments.length) {
+      return (
+        <div>
+          <p>No comments yep!</p>
+          <CommentForm />
+        </div>
+      );
+    }
 
     return (
       <div>
