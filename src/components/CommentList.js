@@ -7,7 +7,7 @@ import CommentForm from './CommentForm';
 
 class CommentList extends Component {
   static propTypes = {
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.array,
     // from toggleOpen
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func
@@ -18,7 +18,7 @@ class CommentList extends Component {
   }
 
   render() {
-    const {isOpen, toggleOpen} = this.props;
+    const {article, isOpen, toggleOpen} = this.props;
 
     return (
       <div>
@@ -31,7 +31,7 @@ class CommentList extends Component {
   }
 
   getBody() {
-    const {comments, isOpen} = this.props;
+    const {article: {comments = [], id}, isOpen} = this.props;
 
     if (!isOpen) return null;
 
@@ -39,7 +39,7 @@ class CommentList extends Component {
       return (
         <div>
           <p>No comments yep!</p>
-          <CommentForm />
+          <CommentForm articleId={id}/>
         </div>
       );
     }
@@ -51,7 +51,7 @@ class CommentList extends Component {
             <Comment id={id} />
           </li>)}
         </ul>
-        <CommentForm />
+        <CommentForm articleId={id}/>
       </div>
     );
   }

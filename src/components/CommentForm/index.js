@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {addComment} from '../../AC';
 
 import './style.css';
 
@@ -15,7 +17,7 @@ const limits = {
 };
 
 
-export default class CommentForm extends Component {
+class CommentForm extends Component {
   state = {
     user: '',
     text: ''
@@ -39,6 +41,7 @@ export default class CommentForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.addComment(this.state);
     this.setState({
       user: '',
       text: ''
@@ -57,3 +60,8 @@ export default class CommentForm extends Component {
     });
   };
 }
+
+
+export default connect(null, (dispatch, ownProps) => ({
+  addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
+}))(CommentForm);

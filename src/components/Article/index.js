@@ -22,6 +22,10 @@ class Article extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      updateIndex: 0
+    };
   }
 
   render() {
@@ -53,7 +57,7 @@ class Article extends Component {
     return (
       <section>
         {article.text}
-        <CommentList comments={article.comments} />
+        <CommentList article={article}/>
       </section>
     );
   }
