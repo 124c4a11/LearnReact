@@ -1,14 +1,17 @@
 import {normalizedArticles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE, ADD_COMMENT} from '../constants';
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES} from '../constants';
 import {arrToMap} from '../helpers';
 
 
-export default (articleState = arrToMap(defaultArticles), action) => {
-  const {type, payload, randomId} = action;
+export default (articleState = {}, action) => {
+  const {type, payload, randomId, response} = action;
 
   console.log('articles reducer randomId ===>', randomId);
 
   switch (type) {
+    case LOAD_ALL_ARTICLES:
+      return arrToMap(response);
+
     case DELETE_ARTICLE:
       const tmpState = {...articleState};
       delete tmpState[payload.id];
