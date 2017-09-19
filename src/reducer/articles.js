@@ -1,5 +1,5 @@
 import {normalizedArticles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES} from '../constants';
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, START, SUCCESS} from '../constants';
 import {arrToMap} from '../helpers';
 import {OrderedMap, Map, Record} from 'immutable';
 
@@ -26,8 +26,14 @@ export default (articleState = defaultState, action) => {
   const {type, payload, randomId, response} = action;
 
   switch (type) {
-    case LOAD_ALL_ARTICLES:
-      return articleState.set('entities', arrToMap(response, ArticleRecord));
+    case LOAD_ALL_ARTICLES + START:
+      return articleState.set('loading', true);
+
+    case LOAD_ALL_ARTICLES + SUCCESS:
+      return articleState
+        .set('entities', arrToMap(response, ArticleRecord))
+        .set('loading', false)
+        .set('loaded', true)
 
     case DELETE_ARTICLE:
       return articleState.deleteIn(['entities', payload.id]);
