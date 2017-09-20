@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import CommentList from '../CommentList';
 import toggleOpen from '../../decorators/toggleOpen';
 import {CSSTransitionGroup} from 'react-transition-group';
 import {connect} from 'react-redux';
-import {deleteArticle} from '../../AC';
+import {loadArticle, deleteArticle} from '../../AC';
+import CommentList from '../CommentList';
+import Loader from '../Loader';
 
 import './article.css';
 
@@ -26,6 +27,10 @@ class Article extends Component {
     this.state = {
       updateIndex: 0
     };
+  }
+
+  componentWillReceiveProps({isOpen, loadArticle, article}) {
+    if (isOpen && !article.text && !article.loading) loadArticle(article.id);
   }
 
   render() {
@@ -54,6 +59,8 @@ class Article extends Component {
 
     if (!isOpen) return null;
 
+    if (article.loading) return <Loader />;
+
     return (
       <section>
         {article.text}
@@ -69,4 +76,4 @@ class Article extends Component {
 }
 
 
-export default connect(null, {deleteArticle})(Article);
+export default connect(null, {deleteArticle, loadArticle})(Article);
