@@ -1,4 +1,4 @@
-import {INCREMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT} from '../constants';
+import {INCREMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT} from '../constants'
 
 
 export function increment() {
@@ -68,5 +68,14 @@ export function loadArticle(id) {
           payload: {id, error}
         }))
     }, 1000);
+  };
+}
+
+
+export function loadArticleComments(articleId) {
+  return {
+    type: LOAD_ARTICLE_COMMENTS,
+    payload: {articleId},
+    callAPI: `/api/comment?article=${articleId}`
   };
 }

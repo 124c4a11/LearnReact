@@ -1,5 +1,5 @@
 import {normalizedArticles as defaultArticles} from '../fixtures';
-import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS} from '../constants';
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS} from '../constants';
 import {arrToMap} from '../helpers';
 import {OrderedMap, Map, Record} from 'immutable';
 
@@ -9,6 +9,8 @@ const ArticleRecord = Record({
   text: '',
   title: '',
   loading: false,
+  commentsLoading: false,
+  commentsLoaded: false,
   comments: []
 });
 
@@ -48,6 +50,14 @@ export default (articleState = defaultState, action) => {
     case ADD_COMMENT:
       return articleState.updateIn(['entities', payload.article.id, 'comments'],
       (comments) => comments.concat(randomId));
+
+    case LOAD_ARTICLE_COMMENTS + START:
+      return articleState.setIn(['entities', payload.articleId, 'commentsLoading'], true)
+
+    case LOAD_ARTICLE_COMMENTS + SUCCESS:
+      return articleState
+        .setIn(['entities', payload.articleId, 'commentsLoading'], false)
+        .setIn(['entities', payload.articleId, 'commentsLoaded'], true);
   }
 
   return articleState;
