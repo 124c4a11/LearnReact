@@ -12,13 +12,15 @@ import './article.css';
 
 class Article extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
+    isOpen: PropTypes.bool,
+    toggleOpen: PropTypes.func,
+    // from connect
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       text: PropTypes.string
-    }).isRequired,
-    isOpen: PropTypes.bool,
-    toggleOpen: PropTypes.func
+    })
   };
 
   constructor(props) {
@@ -35,6 +37,8 @@ class Article extends Component {
 
   render() {
     const {article, isOpen, toggleOpen} = this.props;
+
+    if (!article) return null;
 
     return (
       <div>
@@ -76,4 +80,6 @@ class Article extends Component {
 }
 
 
-export default connect(null, {deleteArticle, loadArticle})(Article);
+export default connect((state, ownProps) => ({
+  article: state.articles.entities.get(ownProps.id)
+}), {deleteArticle, loadArticle})(Article);
