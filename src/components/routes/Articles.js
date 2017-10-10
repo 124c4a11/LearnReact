@@ -17,7 +17,7 @@ class Articles extends Component {
 
   getArticle = ({match}) => {
     const {id} = match.params;
-    return <Article id={id} isOpen />
+    return <Article id={id} isOpen key={id} />;
   };
 }
 

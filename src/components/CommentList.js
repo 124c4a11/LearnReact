@@ -31,7 +31,6 @@ class CommentList extends Component {
 
   getBody() {
     const {article: {comments = [], id, commentsLoaded, commentsLoading}, isOpen} = this.props;
-    console.log(this.props);
 
     if (!isOpen) return null;
     if (commentsLoading) return <Loader />;
