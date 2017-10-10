@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Articles from './routes/Articles';
 import UserForm from './UserForm';
 import Filters from './Filters';
 import Counter from './Counter';
+import Articles from './routes/Articles';
+import NotFound from './routes/NotFound';
 
 
 export default class App extends Component  {
@@ -23,9 +24,12 @@ export default class App extends Component  {
             <div><NavLink activeStyle={{color: 'red'}} to="/articles">articles</NavLink></div>
           </div>
           <UserForm />
-          <Route path="/counter" component={Counter} />
-          <Route path="/filters" component={Filters} />
-          <Route path="/articles" component={Articles} />
+          <Switch>
+            <Route path="/counter" component={Counter} />
+            <Route path="/filters" component={Filters} />
+            <Route path="/articles" component={Articles} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );
