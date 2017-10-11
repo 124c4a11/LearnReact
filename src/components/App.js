@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom';
+import {Route, NavLink, Switch, Redirect} from 'react-router-dom';
+import {ConnectedRouter} from 'react-router-redux';
 import PropTypes from 'prop-types';
+import history from '../history';
 
 import UserForm from './UserForm';
 import Filters from './Filters';
@@ -16,7 +18,7 @@ export default class App extends Component  {
 
   render() {
     return (
-      <Router>
+      <ConnectedRouter history={history}>
         <div>
           <div>
             <h2>Main menu</h2>
@@ -34,7 +36,7 @@ export default class App extends Component  {
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
-      </Router>
+      </ConnectedRouter>
     );
   }
 }
