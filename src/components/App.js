@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import UserForm from './UserForm';
@@ -29,7 +29,8 @@ export default class App extends Component  {
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
             <Route path="/articles" component={Articles} />
-            <Route path="/comments/:page" component={CommentsPage} />
+            <Route path="/comments" component={CommentsPage} />
+            {/* <Redirect from="/comments/" to="/comments/1" /> */}
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
