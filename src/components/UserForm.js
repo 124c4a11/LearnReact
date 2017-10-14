@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 
 
 export default class UserForm extends Component {
-  state = {
-    username: ''
-  };
-
   render() {
     return (
       <div>
         Name: <input
           type="text"
-          value={this.state.username}
+          value={this.props.value}
           onChange={this.handleUserChange}
         />
       </div>
@@ -19,8 +15,7 @@ export default class UserForm extends Component {
   }
 
   handleUserChange = (e) => {
-    this.setState({
-      username: e.target.value
-    });
+    if (e.target.value.length > 10) return;
+    this.props.onChange(e.target.value);
   };
 }

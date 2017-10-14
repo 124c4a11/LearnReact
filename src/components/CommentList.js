@@ -10,6 +10,12 @@ import Loader from './Loader';
 
 
 class CommentList extends Component {
+  static contextTypes = {
+    store: PropTypes.object,
+    router: PropTypes.object,
+    user: PropTypes.string
+  };
+
   componentWillReceiveProps({isOpen, article, loadArticleComments}) {
     if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
       loadArticleComments(article.id);
@@ -21,6 +27,7 @@ class CommentList extends Component {
 
     return (
       <div>
+        <h3>User: {this.context.user}</h3>
         <button onClick={toggleOpen}>
           {isOpen ? 'hide comments' : 'show comments'}
         </button>
@@ -59,4 +66,4 @@ class CommentList extends Component {
 }
 
 
-export default connect(null, {loadArticleComments})(toggleOpen(CommentList));
+export default connect(null, {loadArticleComments}, null, {pure: false})(toggleOpen(CommentList));

@@ -8,7 +8,7 @@ import api from '../middlewares/api';
 import thunk from 'redux-thunk';
 
 
-const enhancer = applyMiddleware(thunk, routerMiddleware(history),logger, api, randomId);
+const enhancer = applyMiddleware(thunk, routerMiddleware(history), api, randomId);
 
 const store = createStore(reducer, {}, enhancer);
 

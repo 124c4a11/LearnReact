@@ -16,6 +16,20 @@ export default class App extends Component  {
   static propTypes = {
   };
 
+  static childContextTypes = {
+    user: PropTypes.string
+  };
+
+  getChildContext() {
+    return {
+      user: this.state.username
+    };
+  };
+
+  state = {
+    username: ''
+  };
+
   render() {
     return (
       <ConnectedRouter history={history}>
@@ -26,7 +40,7 @@ export default class App extends Component  {
             <div><NavLink activeStyle={{color: 'red'}} to="/filters">filters</NavLink></div>
             <div><NavLink activeStyle={{color: 'red'}} to="/articles">articles</NavLink></div>
           </div>
-          <UserForm />
+          <UserForm value={this.state.username} onChange={this.handleUserChange} />
           <Switch>
             <Route path="/counter" component={Counter} />
             <Route path="/filters" component={Filters} />
@@ -38,5 +52,7 @@ export default class App extends Component  {
         </div>
       </ConnectedRouter>
     );
-  }
+  };
+
+  handleUserChange = (username) => this.setState({username});
 }
